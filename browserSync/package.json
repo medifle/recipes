@@ -1,0 +1,17 @@
+{
+  "name": "gulp.libsass.sourcemaps",
+  "description": "Gulp & libsass & sourcemaps ",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "browser-sync": "^2.10.0",
+    "gulp": "^3.9.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-if": "^2.0.0",
+    "gulp-load-plugins": "^1.0.0",
+    "gulp-sass": "^2.1.0",
+    "gulp-sourcemaps": "^1.3.0"
+  },
+  "engines": {
+    "node": ">=0.12"
+  }
+}
