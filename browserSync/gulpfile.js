@@ -4,10 +4,11 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 var $ = gulpLoadPlugins();
 var reload = browserSync.reload;
 
+var testDir = '.tmp';
 var src = {
-    scss: '.tmp/scss/*.scss',
-    css: '.tmp/css',
-    html: '.tmp/*.html'
+    scss: testDir + '/scss/*.scss',
+    css: testDir + '/css',
+    html: testDir + '/*.html'
 };
 
 gulp.task('styles', function() {
@@ -26,12 +27,12 @@ gulp.task('styles', function() {
     // .pipe(reload({stream: true}));
 
     // this works with gulp-if
-    .pipe($.if('*.css', reload({stream: true})));
+    // .pipe($.if('*.css', reload({stream: true})));
 
 
     // this `match` work with normal-named dir
     // however it ignores the dir like `.tmp`
-    // .pipe(reload({stream: true, match: '**/*.css'}));
+    .pipe(reload({stream: true, match: '**/*.css'}));
 
 });
 
@@ -39,7 +40,7 @@ gulp.task('serve', ['styles'], function() {
 
     browserSync({
         notify: false,
-        server: ".tmp"
+        server: testDir
     });
 
     gulp.watch(src.scss, ['styles']);
