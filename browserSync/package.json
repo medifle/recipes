@@ -3,7 +3,7 @@
   "description": "Gulp & libsass & sourcemaps ",
   "main": "gulpfile.js",
   "devDependencies": {
-    "browser-sync": "^2.10.0",
+    "browser-sync": "^2.10.1",
     "gulp": "^3.9.0",
     "gulp-filter": "^3.0.1",
     "gulp-if": "^2.0.0",
