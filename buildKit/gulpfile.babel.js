@@ -29,13 +29,13 @@ const AUTOPREFIXER_BROWSERS = [
   ];
 const imgSrc = 'app/images/**/*';
 const htmlSrc = 'app/*.html';
-const scssSrc = 'app/styles/**/*.scss'; // for watch task
+const scssSrc = 'app/assets/**/*.scss'; // for watch task
 
 // For 'styles' task's performance, put all partials into subdirs
 // Leave scss root dir for main scss files
-const scssMainSrc = 'app/styles/*.scss';
+const scssMainSrc = 'app/assets/*.scss';
 
-const jsSrc = 'app/**/*.js';
+const jsSrc = 'app/assets/**/*.js';
 const fontSrc = 'app/font/**/*.{eot,svg,ttf,woff,woff2}';
 
 
@@ -104,13 +104,13 @@ gulp.task('styles', () => {
 
     //## For development environment
     .pipe($.if(!release, $.sourcemaps.write('./')))
-    .pipe($.if(!release, gulp.dest('tmp/styles')))
+    .pipe($.if(!release, gulp.dest('tmp/assets')))
 
     //## For production environment
     // Minify styles, also concatenate
     .pipe($.if(release, $.if('*.css', $.minifyCss())))
     .pipe($.if(release, $.sourcemaps.write('./')))
-    .pipe($.if(release, gulp.dest('dist/styles')))
+    .pipe($.if(release, gulp.dest('dist/assets')))
 
     .pipe($.size({title: 'styles',
      // showFiles: true
@@ -137,7 +137,7 @@ gulp.task('html', () => {
     })))
 
     // TODO: It seems gulp-cached or use-ref do not support double dots,
-    // like ../file/path/name.js
+    // like ../bower_components/path/name.js
     // so files after double dots path would not be cached
     .pipe($.if(!release, $.cached('jsca')))
     .pipe($.if(!release, $.sourcemaps.init()))
@@ -153,7 +153,10 @@ gulp.task('html', () => {
       // TODO: wiredep fails in lazypipe
       // TODO: lazypipe do not work with gulp-autoprefixer and gulp-sourcemaps
       // the `source` entry of generated css sourcemaps is broken
-      // need to see useref source code
+      // if this work is completed, auto-identifing css files in bower_components and generating them in specified path of dist dir in production mode would be available
+      // Need to see useref source code
+      // TODO: use gulp-debug to see what files are run through gulp pipeline
+      // TODO: gulp-usemin may be an alternative
       lazypipe()
       .pipe($.sourcemaps.init)
       .pipe( () => {
