@@ -32,8 +32,8 @@ const htmlSrc = 'app/*.html';
 const scssSrc = 'app/assets/**/*.scss'; // for watch task
 
 // For 'styles' task's performance, put all partials into subdirs
-// Leave scss root dir for main scss files
-const scssMainSrc = 'app/assets/*.scss';
+// Leave scss `main` dir for main scss files
+const scssMainSrc = 'app/assets/main/*.scss';
 
 const jsSrc = 'app/assets/**/*.js';
 const fontSrc = 'app/font/**/*.{eot,svg,ttf,woff,woff2}';
@@ -113,13 +113,13 @@ gulp.task('styles', () => {
 
     //## For development environment
     .pipe($.if(!release, $.sourcemaps.write('./')))
-    .pipe($.if(!release, gulp.dest('tmp/assets')))
+    .pipe($.if(!release, gulp.dest('tmp/assets/styles')))
 
     //## For production environment
-    // Minify styles, also concatenate
-    .pipe($.if(release, $.if('*.css', $.minifyCss())))
+    // Minify styles
+    .pipe($.if(release, $.if('*.css', $.cssnano({discardComments: {removeAll: true}}))))
     .pipe($.if(release, $.sourcemaps.write('./')))
-    .pipe($.if(release, gulp.dest('dist/assets')))
+    .pipe($.if(release, gulp.dest('dist/assets/styles')))
 
     .pipe($.size({title: 'styles',
      // showFiles: true
@@ -167,17 +167,20 @@ gulp.task('html', () => {
       // TODO: use gulp-debug to see what files are run through gulp pipeline
       // TODO: gulp-usemin may be an alternative
       lazypipe()
+
       .pipe($.sourcemaps.init)
       .pipe( () => {
         return $.if(/\.js$/, $.babel());
       })
     )))
 
+    .pipe($.if(release, $.if(/\.css$/, $.cssnano({discardComments: {removeAll: true}}))))
     .pipe($.if(release ,$.if(/\.js$/, $.uglify())))
-    .pipe($.if(/\.js$/, $.sourcemaps.write('./')))
+
+    .pipe($.sourcemaps.write('./'))
 
     // Minify any HTML
-    // .pipe($.if('*.html', $.minifyHtml()))
+    // .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
 
     // Output files
     .pipe($.if(!release, gulp.dest('tmp')))
