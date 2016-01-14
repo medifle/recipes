@@ -94,14 +94,6 @@ gulp.task('styles', () => {
   // underscore or not) to `gulp.src`
   return gulp.src(scssMainSrc)
 
-    // identify `// bower: css` and `// endbower` lines in scss files from scssMainSrc
-    // and then import files specified in `main` property of bower.json in dirs of bower_components
-    .pipe(wiredep({
-      // cwd: 'app/',
-      // exclude: [''],
-      // ignorePath: /^(\.\.\/)*\.\./
-    }))
-
     .pipe($.sourcemaps.init())
     .pipe($.sass({
       precision: 10,
