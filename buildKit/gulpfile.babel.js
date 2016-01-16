@@ -191,8 +191,13 @@ gulp.task('clean', cb => del(['tmp', 'dist/*', '!dist/.git'], {dot: true}));
 gulp.task('serve', ['html', 'styles'], () => {
   browserSync({
     notify: false,
+
+    // https://www.browsersync.io/docs/options/#option-ghostMode
+    ghostMode: false,
+
     // Customize the Browsersync console logging prefix
     // logPrefix: 'WSK',
+
     // Allow scroll syncing across breakpoints
     // scrollElementMapping: ['main',],
 
