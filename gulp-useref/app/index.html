@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>noconcat issue of gulp-useref</title>
+
+  <!-- build:css styles/concated.css -->
+  <link rel="stylesheet" href="css/a.css">
+  <link rel="stylesheet" href="css/b.css">
+  <!-- endbuild -->
+
+</head>
+
+<body>
+  <p>a reduced test on gulp-useref noconcat issue</p>
+
+  <!-- build:js scripts/concated.js -->
+  <script src="js/a.js"></script>
+  <script src="js/b.js"></script>
+  <script src="js/c.js"></script>
+  <!-- endbuild -->
+
+</body>
+
+</html>
