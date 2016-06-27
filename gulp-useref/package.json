@@ -3,14 +3,14 @@
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-useref": "^3.0.8",
+    "gulp-useref": "^3.0.4",
     "lazypipe": "^1.0.1"
   },
   "engines": {
     "node": ">=0.12"
   },
   "private": true,
-  "name": "gulp-useref",
+  "name": "gulp-useref-noconcat",
   "version": "1.0.0",
   "description": "a reduced test on gulp-useref by medifle",
   "main": "gulpfile.js",
